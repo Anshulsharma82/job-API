@@ -30,6 +30,8 @@ userSchema.pre('save', async function () {
 })
 
 // This we can use after getting the model...
+// we can only use it on doc suppose if we hit find query and if we try to get this method on res then it is not possible
+// but if we try to get this method on res[0] or res[1] then it exists.
 userSchema.methods.createJWT = function () {
     const token = jwt.sign({ name: this.name, userId: this._id }, process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRATION_TIME })
